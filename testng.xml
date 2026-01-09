@@ -1,0 +1,54 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="AutomationSuite">
+
+  <!-- Smoke Tests -->
+  <test name="SmokeTests">
+    <parameter name="baseUrl" value="https://example.com"/>
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="com.example.LoginTest">
+        <methods>
+          <!-- Run only these methods -->
+          <include name="validLoginTest"/>
+          <include name="invalidLoginTest"/>
+          <!-- Skip this method -->
+          <exclude name="emptyFieldsTest"/>
+        </methods>
+      </class>
+
+      <class name="com.example.HomePageTest">
+        <methods>
+          <!-- Run only homepage load test -->
+          <include name="homePageLoadTest"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
+  <!-- Regression Tests -->
+  <test name="RegressionTests">
+    <classes>
+      <class name="com.example.CheckoutTest">
+        <methods>
+          <!-- Exclude one method -->
+          <exclude name="guestCheckoutTest"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+
+    <!-- Smoke Tests -->
+  <test name="SmokeTests">
+    <groups>
+        <run>
+            <include name="smoke"/>
+        </run>
+    </groups>
+    <classes>
+        <class name="com.example.HomePageTest"/>        
+        <class name="com.example.CheckoutTest"/>
+    </classes>
+  </test>
+
+</suite>
